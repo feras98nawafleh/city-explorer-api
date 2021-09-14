@@ -1,0 +1,28 @@
+{
+  "name": "city-explorer-api",
+  "version": "1.0.0",
+  "description": "an API to be used in city-explorer project",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feras98nawafleh/city-explorer-api.git"
+  },
+  "keywords": [
+    "city-explorer",
+    "city-explorer-api"
+  ],
+  "author": "Feras Nawafleh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/feras98nawafleh/city-explorer-api/issues"
+  },
+  "homepage": "https://github.com/feras98nawafleh/city-explorer-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  }
+}
