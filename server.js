@@ -32,6 +32,10 @@ server.get('/weather', (req, res) => {
   }
 });
 
+server.get('/weather', (req, res) => {
+  // converting to get data from outsource API
+});
+
 server.listen(PORT, () => {
   console.log(`Listening on PORT ${PORT}`);
 });
