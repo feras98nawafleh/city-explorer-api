@@ -47,53 +47,14 @@
 const express = require('express');
 const server = express();
 const cors = require('cors');
-const axios = require('axios');
 server.use(cors());
 require('dotenv').config();
 const PORT = process.env.PORT;
 
-class WeatherModel {
-  constructor(date, description) {
-    this.date = date;
-    this.description = description;
-  }
-}
-
-let handleWeatherAPI = async (req, res) => {
-  let latitude = req.query.latitude;
-  let longitude = req.query.longitude;
-  let url = `HTTPS: https://api.weatherbit.io/v2.0/forecast/daily?latitude=${latitude}&longitude=${longitude}&key=${process.env.WEATHER_API_KEY}`;
-  let response = await axios.get(url);
-  let respondeData = response.data.map(item => {
-    return new WeatherModel(item.datetime, item.weather.description);
-  });
-  res.status(200).json(respondeData);
-};
+const handleWeatherAPI = require('./controllers/Weather.Controller');
+const handleMoviesAPI = require('./controllers/Movies.Controller');
 
 server.get('/weather', handleWeatherAPI);
-
-class MoviesModel {
-  constructor(title, overview, average_votes, total_votes, image_url, popularity, released_on) {
-    this.title = title;
-    this.overview = overview;
-    this.average_votes = average_votes;
-    this.total_votes = total_votes;
-    this.image_url = image_url;
-    this.popularity = popularity;
-    this.released_on = released_on;
-  }
-}
-
-let handleMoviesAPI = async (req, res) => {
-  let place = req.query.place;
-  let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIES_API_KEY}&query='${place}''`;
-  let response = await axios.get(url);
-  let responseData = response.map(item => {
-    return new MoviesModel(item.title, item.overview, item.vote_average, item.vote_count, item.backdrop_path, item.popularity, item.release_date);
-  });
-  res.status(200).json(responseData);
-};
-
 server.get('/movies', handleMoviesAPI);
 
 server.listen(PORT, () => {
