@@ -86,7 +86,7 @@ class MoviesModel {
 
 let handleMoviesAPI = async (req, res) => {
   let place = req.query.place;
-  let url = `https://api.themoviedb.org/3/movie/550?api_key=558d73a6bcd871fec9444366055bd10c?api_key=${process.env.MOVIES_API_KEY}&place=${place}`;
+  let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIES_API_KEY}&query='${place}''`;
   let response = await axios.get(url);
   let responseData = response.map(item => {
     return new MoviesModel(item.title, item.overview, item.vote_average, item.vote_count, item.backdrop_path, item.popularity, item.release_date);
